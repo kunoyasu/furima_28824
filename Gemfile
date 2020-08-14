@@ -52,3 +52,13 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Rubocopを導入
+group :development do
+  gem 'rubocop', require: false
+end
+
+# rails_12factorを導入
+group :production do
+  gem 'rails_12factor'
+end
