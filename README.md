@@ -15,42 +15,41 @@
 - has_many :items , orders
 
 
-## ITEM テーブル
+## ITEMS テーブル
 | Column                     | Type   | Options     |
 | ---------------------------| ------ | ----------- |
 | name                       | string | null: false |
-| item_image_id:             | string | null: false ,foreign_key: true|
-| price                      | string | null: false |
+| item_image:                | string | null: false |
+| price                      | integer| null: false |
 | introduction               | string | null: false |
-| user_id                    | references | null: false ,foreign_key: true|
-| category_id                | string | null: false ,foreign_key: true|
-| item_condition_id          | string | null: false ,foreign_key: true|
-| shipping_charge_id         | string | null: false ,foreign_key: true|
-| shipping_region_id         | string | null: false ,foreign_key: true|
-| estimated_shipping_date_id | string | null: false ,foreign_key: true|
-| sold_out_id                | string | null: false ,foreign_key: true|
+| user           　          | references | null: false ,foreign_key: true|
+| category_id                | integer | null: false |
+| item_condition_id          | integer | null: false |
+| shipping_charge_id         | integer | null: false |
+| shipping_region_id         | integer | null: false |
+| estimated_shipping_date_id | integer | null: false |
+| sold_out_id                | integer | null: false |
 ### Association
-- belongs_to :users , items
-- has_one:orders 
+- belongs_to :user
+- has_one:order
 
 
 ## Orders テーブル
 | ---------------------------| -----------| -------------------------------|
-| user_id                    | references | null: false ,foreign_key: true |
-| item_id                    | references | null: false ,foreign_key: true |
-
+| user                       | references | null: false ,foreign_key: true |
+| item   　　                 | references | null: false ,foreign_key: true |
 ### Association
-- belongs_to :item,users
+- belongs_to :item,user
 - has_one    :delivery
 
 ## DELIVERY テーブル
-| ---------------------------| ------ | ----------- |
-| postal_code                | string | null: false |
-| prefecture_id              | string | null: false |
-| city                       | string | null: false |
-| address                    | string | null: false |
-| building_name              | string |             | 
-| phone_number               | string | null: false |
-| order_id                   | string | null: false |
+| ---------------------------| ------  | ----------- |
+| postal_code                | integer | null: false |
+| prefecture_id              | integer | null: false |
+| city                       | string  | null: false |
+| address                    | integer | null: false |
+| building_name              | string  | 　　　　　 　 | 
+| phone_number               | integer | null: false |
+| order                      | references | null: false,foreign_key: true|
 ### Association
-- belongs_to :orders
+- belongs_to :order
