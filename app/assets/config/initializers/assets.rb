@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w(assets/stylesheets/*)
+Rails.application.config.assets.precompile += %w[assets/stylesheets/*]
