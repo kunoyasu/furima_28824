@@ -56,7 +56,19 @@ describe User do
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
 
-      it 'passwordが5文字以下であれば登録できない' do
+      it 'パスワードに英小文字が含まれなければ登録できない' do
+        @user.password = including '\l'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+
+      it 'パスワードに数字が含まれていなければ登録できない' do
+        @user.password = including '\d'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+
+      it 'passwordが5文字以下である場合は登録できない' do
         @user.password = '00000'
         @user.password_confirmation = '00000'
         @user.valid?
@@ -65,18 +77,6 @@ describe User do
 
       it 'passwordが存在してもpassword_confirmationが空では登録できない' do
         @user.password_confirmation = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
-      end
-
-      it 'パスワードに英小文字が含まれない' do
-        @user.password = including '\l'
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
-      end
-
-      it 'パスワードに数字が含まれない' do
-        @user.password = include '\d'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
