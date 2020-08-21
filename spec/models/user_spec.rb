@@ -11,8 +11,8 @@ describe User do
       end
 
       it 'passwordが6文字以上であれば登録できる' do
-        @user.password = '000000'
-        @user.password_confirmation = '000000'
+        @user.password = 'aaa000'
+        @user.password_confirmation = 'aaa000'
         expect(@user).to be_valid
       end
 
@@ -23,6 +23,7 @@ describe User do
     end
 
     context '新規登録がうまくいかないとき' do
+    
       it 'nicknameが空だと登録できない' do
         @user.nickname = ''
         @user.valid?
@@ -69,15 +70,15 @@ describe User do
       end
 
       it 'パスワードに英小文字が含まれない' do
-        @user.password = include '\l'
+        @user.password = including '\l'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password is invalid')
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
       it 'パスワードに数字が含まれない' do
         @user.password = include '\d'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password is invalid')
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
       it 'パスワードと確認用パスワードが一致しない' do
@@ -91,6 +92,13 @@ describe User do
         @user.family_name_kana = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Family name kana can't be blank")
+      end
+
+      it "フリガナがカタカナでなければ登録できない。" do
+        @user.family_name_kana = including format: %w{(/\A[ァ-ヶー－]+\z/)} 
+        last_name_kana= '和夫' 
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name kana is invalid")
       end
 
       it 'last_name_kanaが空では登録できない' do
