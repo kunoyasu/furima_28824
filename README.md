@@ -20,7 +20,7 @@
 | Column                     | Type   | Options     |
 | ---------------------------| ------ | ----------- |
 | name                       | string | null: false |
-| image　　　                 | string | null: false |
+| image                      | string | null: false |
 | price                      | integer| null: false |
 | introduction               | text   | null: false |
 | user                       | references | null: false , foreign_key: true|

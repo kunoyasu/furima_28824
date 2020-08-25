@@ -70,3 +70,10 @@ end
 gem 'devise'
 
 gem 'pry-rails'
+
+#アクティブハッシュの導入
+gem 'active_hash'
+
+#Active Storage導入
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
