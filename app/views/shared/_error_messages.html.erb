@@ -1,4 +1,5 @@
 <% if @item.errors.any? %>
+binding.pry
 <div class="error-alert">
   <ul>
     <% @item.errors.full_messages.each do |message| %>
