@@ -21,7 +21,6 @@ describe Item do
 
     context '新規登録がうまくいかないとき' do
       it 'imageが空だと登録できない' do
-        # pic tweet参照
         @item.image = nil
 
         @item.valid?

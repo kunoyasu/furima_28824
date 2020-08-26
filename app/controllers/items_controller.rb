@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # before_action :set_item, only: [:edit, :show]
 
   def index
-    @items = Item.all
+    @items = Item.includes(:user).order("created_at DESC")
   end
 
   def new
