@@ -23,7 +23,6 @@ describe User do
     end
 
     context '新規登録がうまくいかないとき' do
-    
       it 'nicknameが空だと登録できない' do
         @user.nickname = ''
         @user.valid?
@@ -94,11 +93,11 @@ describe User do
         expect(@user.errors.full_messages).to include("Family name kana can't be blank")
       end
 
-      it "フリガナがカタカナでなければ登録できない。" do
-        @user.family_name_kana = including format: %w{(/\A[ァ-ヶー－]+\z/)} 
-        last_name_kana= '和夫' 
+      it 'フリガナがカタカナでなければ登録できない。' do
+        @user.family_name_kana = including format: %w{(/\A[ァ-ヶー－]+\z/)}
+        last_name_kana = '和夫'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kana is invalid")
+        expect(@user.errors.full_messages).to include('Family name kana is invalid')
       end
 
       it 'last_name_kanaが空では登録できない' do
