@@ -25,9 +25,7 @@ describe Item do
 
    context '新規登録がうまくいかないとき' do
      it 'imageが空だと登録できない' do
-      binding.pry
       @item.image = ''
-      binding.pry
       @item.valid?
       expect(@item.image.errors.full_messages).to include("Image can't be blank")
       
