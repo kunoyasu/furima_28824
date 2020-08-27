@@ -23,12 +23,19 @@ class ItemsController < ApplicationController
     end
   end
 
+
+  def show
+    @item = Item.find(params[:id])
+  end
+
   private
 
   def item_params
-    params.require(:item).permit(:name, :image, :price, :introduction, :category_id, :condition_id, :shipping_charge_id, :shipping_region_id, :estimated_shipping_date_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :image, :price, :introduction, :category_id, :condition_id, :shipping_charge_id, :shipping_region_id, :estimated_shipping_date_id).merge(:user_id, :current_user.id)
+    # params.require(:item).permit{"item" => { "name"=>"ゴリラ","image"=>"i","introducion"=>"ゴリラです","category_id"=>1,"condition_id"=>1 ,"comment"=>"test","shipping_charge_id"=>"1" }
   end
 end
+
 
 # def update
 # item = Item.find(params[:id])
