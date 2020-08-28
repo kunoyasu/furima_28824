@@ -30,11 +30,12 @@ class ItemsController < ApplicationController
   end
 
   def update
-    redirect_to item_path(@item) if @item.update(item_params)
-  end
-
-  def set_item
-    @item = Item.find(params[:id])
+    if 
+     @item.update(item_params)
+     redirect_to item_path(@item) 
+    else
+     render "edit"
+    end
   end
 
   private
@@ -46,4 +47,9 @@ class ItemsController < ApplicationController
   def update_params
     params.require(:item).permit(:name, :image, :price, :introduction, :category_id, :condition_id, :shipping_charge_id, :shipping_region_id, :estimated_shipping_date_id) [:image_url, :id]
   end
+  
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
 end
