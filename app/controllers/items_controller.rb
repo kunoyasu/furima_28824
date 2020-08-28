@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
-  # before_action :set_item, only: [:edit, :show]
+  before_action :set_item, only: [:edit, :show, :update]
 
   def index
-    @items = Item.includes(:user).order("created_at DESC")
+    @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
@@ -23,33 +23,33 @@ class ItemsController < ApplicationController
     end
   end
 
-
   def show
-    @item = Item.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if 
+     @item.update(item_params)
+     redirect_to item_path(@item) 
+    else
+     render "edit"
+    end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:name, :image, :price, :introduction, :category_id, :condition_id, :shipping_charge_id, :shipping_region_id, :estimated_shipping_date_id).merge(:user_id, :current_user.id)
-    # params.require(:item).permit{"item" => { "name"=>"ゴリラ","image"=>"i","introducion"=>"ゴリラです","category_id"=>1,"condition_id"=>1 ,"comment"=>"test","shipping_charge_id"=>"1" }
+    params.require(:item).permit(:name, :image, :price, :introduction, :category_id, :condition_id, :shipping_charge_id, :shipping_region_id, :estimated_shipping_date_id).merge(user_id: current_user.id)
   end
+
+  def update_params
+    params.require(:item).permit(:name, :image, :price, :introduction, :category_id, :condition_id, :shipping_charge_id, :shipping_region_id, :estimated_shipping_date_id) [:image_url, :id]
+  end
+  
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
 end
-
-
-# def update
-# item = Item.find(params[:id])
-# item.update(item_params)
-# end
-
-# def destroy
-# item = Items.find(params[:id])
-# item.destroy
-# end
-
-# def show
-# end
-
-# def set_item
-# item = Item.find(params[:id])
-# end

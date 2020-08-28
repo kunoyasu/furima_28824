@@ -18,12 +18,12 @@ class Item < ApplicationRecord
     validates :price
   end
 
-  #ジャンルの選択が「--」の時は保存できないようにする
-  with_options numericality: { other_than: 1 }  do
+  # ジャンルの選択が「--」の時は保存できないようにする
+  with_options numericality: { other_than: 1 } do
     validates :category_id
     validates :condition_id
     validates :shipping_charge_id
-    validates :shipping_region_id 
+    validates :shipping_region_id
     validates :estimated_shipping_date_id
   end
 
