@@ -23,7 +23,7 @@
         <%= form.file_field :image, id:"item-image" %>
     
         <%= image_tag @item.image.variant(resize:'500x500'), class: 'img-upload' if @item.image.attached?%>
-       
+
       </div>
     </div>
     <%# /出品画像 %>
