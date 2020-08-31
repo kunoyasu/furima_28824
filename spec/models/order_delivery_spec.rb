@@ -53,4 +53,10 @@ describe OrderDelivery do
     @order_delivery.valid?
     expect(@order_delivery.errors.full_messages).to include("Phone number can't be blank")
   end
+  
+  it'phone_numberがハイフンありだと登録できない' do 
+    @order_delivery.phone_number = including '-'
+    @order_delivery.valid?
+    expect(@order_delivery.errors.full_messages).to include("Phone number is invalid")
+  end
 end
