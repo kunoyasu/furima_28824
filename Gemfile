@@ -80,3 +80,6 @@ gem 'image_processing', '~> 1.2'
 
 #pay jpの導入
 gem 'payjp'
+
+#aws s3の導入
+gem "aws-sdk-s3", require: false
