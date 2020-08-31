@@ -6,10 +6,10 @@ class OrdersController < ApplicationController
     @order_delivery = OrderDelivery.new
     @item = Item.find(params[:item_id])
     if user_signed_in? && @item.user_id != current_user.id
-    else
+     else
       redirect_to root_path
     end
-    end
+  end
 
   # 「order」という変数を作成
   def new
@@ -24,10 +24,8 @@ class OrdersController < ApplicationController
       @order_delivery.save
       redirect_to root_path
     else
-      # render item_orders_path(@item.id)
       @item = Item.find(params[:item_id])
       render :index
-       # render template: "items/index"
      end
    end
 
@@ -37,7 +35,6 @@ class OrdersController < ApplicationController
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # PAY.JPテスト秘密鍵
     Payjp::Charge.create(
       amount: @item.price, # 商品の値段
-      # amount: order_params[:price]
       card: params[:token], # カードトークン
       currency: 'jpy' # 通貨の種類(日本円)
     )
@@ -46,9 +43,9 @@ class OrdersController < ApplicationController
   private
 
   # オーダーのパラムス情報を取得。
-
   def order_params
     @item = Item.find(params[:item_id])
-    params.permit(:postal_code, :shipping_region_id, :city, :address, :building_name, :phone_number, :item_id).merge(user_id: current_user.id)
+    params.permit(:postal_code, :shipping_region_id, :city, :address, :building_name, :phone_number, :item_id, :token).merge(user_id: current_user.id)
   end
+
 end

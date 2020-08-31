@@ -10,6 +10,12 @@ describe OrderDelivery do
 
   it 'すべての値が正しく入力されていれば保存できること' do
     expect(@order_delivery).to be_valid
+  end 
+
+  it 'カードトークンが無いと保存できないこと' do
+    @order_delivery.token = nil
+    @order_delivery.valid?
+    expect(@order_delivery.errors.full_messages).to include("Token can't be blank")
   end
 
   it 'postal_codeが空だと保存できないこと' do
