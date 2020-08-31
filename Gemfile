@@ -77,3 +77,6 @@ gem 'active_hash'
 #Active Storage導入
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
+
+#pay jpの導入
+gem 'payjp'

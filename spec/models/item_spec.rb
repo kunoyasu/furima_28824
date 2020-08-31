@@ -10,8 +10,6 @@ describe Item do
     @item.image = fixture_file_upload('img/example.png', 'img/png')
   end
 
-  # ./spec/models/item_spec.rb:10:in `block (2 levels) in <top (required)>'
-
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいくとき' do
       it 'image、name、introduction、category_id、condition_id、shipping_charge_id、estimated_shipping_date_id、priceが存在すれば登録できる' do
@@ -22,7 +20,6 @@ describe Item do
     context '新規登録がうまくいかないとき' do
       it 'imageが空だと登録できない' do
         @item.image = nil
-
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
