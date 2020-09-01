@@ -83,7 +83,7 @@
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%= form.collection_select(:estimated_shipping_date_id, ShippingCharge.all, :id, :name ,{prompt: ""},{class:"select-box", id:"item-scheduled-delivery"}) %>
+        <%= form.collection_select(:estimated_shipping_date_id, EstimatedShippingDate.all, :id, :name ,{prompt: ""},{class:"select-box", id:"item-scheduled-delivery"}) %>
       </div>
     </div>
     <%# /配送について %>
